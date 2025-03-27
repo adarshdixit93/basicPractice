@@ -1,6 +1,6 @@
 ### Quick Sort
 
-```
+```js
 function quickSort(arr){
     // If arr length is less that 1 then we can directly return that arr
     if(arr.length < 1) return arr;
