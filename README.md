@@ -67,3 +67,93 @@ let loginTimestamps = [5, 10, 15, 30, 40, 50, 80, 90, 100, 120];
 let k = 3;
 console.log(mostActiveWindow(loginTimestamps, k));
 ```
+## Simply Linked List
+### Create Node, Append in last , prepend , insert at given position , delete node
+```js
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null
+    }
+}
+
+class LinkedList {
+    constructor(){
+        this.head = null;
+    }
+    
+    append(value){
+        let newNode = new Node(value);
+        
+        if(!this.head) {
+            this.head = newNode;
+            return
+        }
+        let current = this.head;
+        while(current.next) {
+            current = current.next;
+        }
+        
+        current.next = newNode;
+    }
+    printList(){
+        let current = this.head;
+        let list = '';
+        while(current){
+            list += current.value + '->';
+            current = current.next;
+        }
+        console.log(list+'null');
+    }
+    prepend(value){
+        let newNode = new Node(value);
+        newNode.next = this.head;
+        this.head = newNode;
+    }
+    insertAtPosition(value,position){
+        if(position === 0){
+            this.prepend(value);
+            return;
+        }
+        let newNode = new Node(value);
+        let current = this.head;
+        let index = 0;
+        while(current && index < position - 1){
+            current = current.next;
+            index++
+        }
+        if(!current) {
+            console.log("can not insert at given position");
+            return
+        }
+        newNode.next = current.next;
+        current.next = newNode;
+    }
+    deleteNode(value){
+        if(!this.head) return;
+        if(this.head.value === value){
+            this.head = this.head.next;
+            return;
+        }
+        let current = this.head;
+        while(current.next && current.next.value != value){
+            current  = current.next;
+        }
+        
+        if (!current.next) {
+            console.log("Node not found");
+            return;
+        }
+        
+        current.next = current.next.next
+    }
+}
+
+let list = new LinkedList();
+list.append(10);
+list.append(20);
+list.prepend(0);
+list.insertAtPosition(50,2);
+list.deleteNode(50);
+list.printList();
+```
